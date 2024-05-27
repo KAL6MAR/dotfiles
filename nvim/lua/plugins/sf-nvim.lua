@@ -1,5 +1,5 @@
 return {
-  "xixiaofinland/sf.nvim",
+  dir = "~/.config/nvim/lua/derhachov/local_plugins/sf.nvim",
   branch = "dev",
 
   dependencies = {
@@ -12,6 +12,7 @@ return {
       -- Hotkeys and user commands are enabled for these filetypes
       hotkeys_in_filetypes = {
         "apex",
+        "Apex",
         "sosl",
         "soql",
         "javascript",

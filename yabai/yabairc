@@ -3,15 +3,17 @@ yabai -m config layout bsp
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
+yabai -m config external_bar all:35:0
+
 yabai -m config window_placement second_child
 
 # padding
 
-yabai -m config top_padding 5
-yabai -m config bottom_padding 5
-yabai -m config lef_padding 5
-yabai -m config right_padding 5
-yabai -m config window_gap 5
+yabai -m config top_padding 3
+yabai -m config bottom_padding 3
+yabai -m config left_padding 3
+yabai -m config right_padding 3
+yabai -m config window_gap 12
 
 # mouse settings
 
@@ -22,33 +24,44 @@ yabai -m config mouse_action2 resize
 yabai -m config mouse_drop_action swap
 
 # disable specific apps
-#yabai -m rule --add app="^System Settings$" manage=off
-#yabai -m rule --add app="^Calculator$" manage=off
-#yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
 
 yabai -m space 1 --label Web 
 yabai -m space 2 --label Nvim
-yabai -m space 3 --label Finder
-yabai -m space 4 --label Git
-yabai -m space 5 --label Preferences 
-yabai -m space 6 --label media
-yabai -m space 7 --label social
+yabai -m space 3 --label Music
+yabai -m space 4 --label Chat
+yabai -m space 5 --label Mail 
+yabai -m space 6 --label Games
+yabai -m space 7 --label Work
+yabai -m space 8 --label Excel
 
 # window rules
-yabai -m rule --add app="^Google Chrome$" space=Web
+yabai -m rule --add app="^Arc$" space=Web
 yabai -m rule --add app="^Safari$" space=Web
-yabai -m rule --add app="^Notes$" space=social
-yabai -m rule --add app="^iTerm$" space=Nvim
-yabai -m rule --add app="^Transmission$" space=media
-yabai -m rule --add app="^Tower$" space=Git
+yabai -m rule --add app="^kitty$" space=Nvim
 yabai -m rule --add app="^Archive Utility$" manage=off
-yabai -m rule --add app="^Pixelmator$" space=media manage=off
 yabai -m rule --add app="^System Preferences$" manage=off
-yabai -m rule --add app="^Digital Colou?r Meter$" sticky=on
-yabai -m rule --add app="^AppCleaner$" manage=off
-yabai -m rule --add app="^Radio Silence$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Preview$" manage=off
-yabai -m rule --add app="^Finder$" space=Finder #manage=off
-yabai -m rule --add app="^Kite$" space=Git manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Mail$" space=Mail
+yabai -m rule --add app="^Messages$" space=Chat
+yabai -m rule --add app="^Slack$" space=Chat
+yabai -m rule --add app="^Microsoft Excel$" space=Excel
+yabai -m rule --add app="^Microsoft Word$" space=Excel
+yabai -m rule --add app="^Microsoft PowerPoint$" space=Excel
+yabai -m rule --add app="^Microsoft Outlook$" space=Mail
+yabai -m rule --add app="^Microsoft Teams$" space=Chat
+yabai -m rule --add app="^Microsoft OneNote$" space=Work
+yabai -m rule --add app="^Microsoft OneDrive$" space=Work
+yabai -m rule --add app="^Music$" space=Music
 
+# focus window after active space changes
+yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+
+# focus window after active display changes
+yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+
+borders active_color=0xff82aaff inactive_color=0xff494d64 width=8.0 &

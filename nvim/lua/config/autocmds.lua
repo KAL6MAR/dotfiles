@@ -49,3 +49,16 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     vim.cmd("set filetype=apex")
   end,
 })
+
+vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#545c7e", bold = true })
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#c8d3f5", bold = true })
+vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#545c7e", bold = true })
+
+vim.api.nvim_set_hl(0, "CmpNormal", { bg = "#222436" })
+vim.api.nvim_set_hl(0, "CmpNormalSelect", { bg = "#82aaff" })
+
+vim.api.nvim_create_augroup("_terminal", { clear = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+  command = "setlocal winhighlight=Normal:CmpNormal",
+  group = "_terminal",
+})
